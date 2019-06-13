@@ -1,5 +1,3 @@
-# CatButler1
-
 Practice REACT, SASS
 
 npm run start //실시간 개발시
