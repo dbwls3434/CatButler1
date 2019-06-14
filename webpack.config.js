@@ -1,13 +1,11 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
+const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 
 module.exports = {
   entry: path.join(__dirname, 'src', 'index.js'),
-  output: {
-    path: path.join(__dirname, 'build'),
-    filename: 'bundle.js'
-  },
   module: {
     rules: [
       {
@@ -32,6 +30,23 @@ module.exports = {
           }
         ]
       }
+    ]
+  },
+  optimization: {
+    minimizer: [
+      new TerserPlugin({
+        cache: true,
+        parallel: true,
+        sourceMap: true
+      }),
+      new OptimizeCssAssetsPlugin({
+        assetNameRegExp: /.(css|scss)$/,
+        cssProcessor: require('cssnano'),
+        cssProcessorPluginOptions: {
+          preset: ['default', { discardComments: { removeAll: true } }]
+        },
+        canPrint: true
+      })
     ]
   },
   plugins: [
