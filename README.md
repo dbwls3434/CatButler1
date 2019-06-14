@@ -1,4 +1,4 @@
-Practice REACT, SASS
+REACT, SASS 코딩과 배포를 위한 환경 설정
 
 npm run start //실시간 개발시
 
